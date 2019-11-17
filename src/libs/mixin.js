@@ -19,5 +19,11 @@ Vue.mixin({
         params
       });
     },
+    /**
+     * 页面reload
+     */
+    reload() {
+      location.href=location.href.split('#')[0]
+    },
   }
 })

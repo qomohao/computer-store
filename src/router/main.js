@@ -10,23 +10,30 @@ export  default [
         meta: {
             title: 'home',
         },
-        redirect:"/test1",
+        redirect:"/goods-list",
         component:  () => import(/* webpackChunkName: 'main' */'@/views/main/home.vue'),
         children:[
             {
-                path: '/test1',
-                name: "test1",
+                path: '/goods-list',
+                name: "goods-list",
                 meta: {
-                    title: 'test1',
+                    title: 'goods-list',
                 },
-                component:  () => import(/* webpackChunkName: 'main' */'@/views/main/test1.vue'),
-            }, {
-                path: '/test2',
-                name: "test2",
+                component:  () => import(/* webpackChunkName: 'main' */'@/views/main/goods-list.vue'),
+            },{
+                path: '/goods-detail',
+                name: "goods-detail",
                 meta: {
-                    title: 'test2',
+                    title: 'goods-detail',
                 },
-                component:  () => import(/* webpackChunkName: 'main' */'@/views/main/test2.vue'),
+                component:  () => import(/* webpackChunkName: 'main' */'@/views/main/goods-detail.vue'),
+            },{
+                path: '/about-us',
+                name: "about-us",
+                meta: {
+                    title: 'about-us',
+                },
+                component:  () => import(/* webpackChunkName: 'main' */'@/views/main/about-us.vue'),
             },
         ]
     },

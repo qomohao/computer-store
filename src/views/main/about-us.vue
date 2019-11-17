@@ -1,15 +1,15 @@
 /**
-* create on 2019/11/15 15:12
+* create on 2019/11/17 17:21
 * @author   wanghao
 */
 <template>
-    <div class="test1">
-        <h1>test1</h1>
+    <div class="about-us">
+        <h1>关于我们</h1>
     </div>
 </template>
 <script>
     export default {
-        name: "test1",
+        name: "about-us",
         data() {
             return {}
         },
@@ -21,7 +21,7 @@
 </script>
 
 <style lang='less' scoped>
-    .test1 {
+    .about-us {
 
     }
 </style>
