@@ -80,7 +80,9 @@
               })
             }
         },
-        methods: {}
+        methods: {
+           
+        }
     }
 </script>
 

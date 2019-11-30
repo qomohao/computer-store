@@ -9,13 +9,14 @@ import Vue from 'vue';
  * axios配置
  */
 Vue.prototype.axios= axios;
+// axios.defaults.baseURL = 'http://127.0.0.1:3000';
 axios.defaults.baseURL = '';
 axios.defaults.timeout = 30000;
 
 /**
  * API数据请求接口封装
  */
-let baseUrl='127.0.0.1:3000';
+// let baseUrl='127.0.0.1:3000';
 
 const getAjaxUrl =(baseUrl)=>   {
     // return configURL.baseURL + url + configURL.urlParams+'&openId='+openId+'&accessId'+accessId;

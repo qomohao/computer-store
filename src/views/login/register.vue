@@ -12,7 +12,7 @@
                         <el-input v-model="username"></el-input>
                     </el-form-item>
                     <el-form-item label="password">
-                        <el-input v-model="password"></el-input>
+                        <el-input v-model="password"  type="password"></el-input>
                     </el-form-item>
                     <el-form-item label="repassword">
                         <el-input v-model="repassword" type="password"></el-input>
@@ -20,13 +20,14 @@
                 </el-form>
             </div>
             <div class="act">
-                <el-button type="primary">注 册</el-button>
+                <el-button type="primary" @click="register">注 册</el-button>
                 <el-button @click="goToPage('login')">已注册 去登陆</el-button>
             </div>
         </div>
     </div>
 </template>
 <script>
+import {$add} from '@/api/users'
     export default {
         name: "register",
         data() {
@@ -42,6 +43,33 @@
         methods: {
             onSubmit() {
                 console.log('submit!');
+            },
+             async register(){
+              if(!this.username || !this.password || !this.repassword){
+                this.$message({
+                    type: 'warning',
+                    message: '不能为空!'
+                });
+                
+                return;
+              }else if(this.password!=this.repassword){
+                    this.$message({
+                    type: 'warning',
+                    message: '两次密码不一致！'
+                });
+                return
+                }
+                let data = await $add({},{
+                    username:this.username,
+                    password:this.password
+                })
+                if(data && data.status==1){
+                      this.$message({
+                            type: 'success',
+                            message: '登录成功!'
+                      });
+                    console.log(data)
+                }
             }
         }
     }
