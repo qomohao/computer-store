@@ -6,17 +6,19 @@
     <div class="order-result">
         <div class="pay-result flex  align-center">
            <div class="icon">
-               <i class="el-icon-success success"></i>
-               <p>支付成功！</p>
-               <i class="el-icon-success error" v-if="false"></i>
-               <p v-if="false">支付失败！</p>
+               <i class="el-icon-success success" v-if="$route.query.result==0"></i>
+               <p v-if="$route.query.result==0">支付成功！</p>
+               <i class="el-icon-error error" v-if="$route.query.result==1"></i>
+               <p v-if="$route.query.result==1">支付失败！</p>
            </div>
             <div class="pay-info">
-               <div>
+               <div v-if="$route.query.result==0">
                    <p>订单正在处理中，请耐心等待</p>
-                   <p>111</p>
-                   <p>11111111111111111111</p>
-                   <p>111</p>
+                   <p>您对我们的支持，是我们进步的最大动力！</p>
+               </div>
+               <div v-else>
+                   <p>订单支付失败！</p>
+                   <p>请稍后重试~</p>
                </div>
                 <div>
                     <el-button type="warning" @click="goToPage('goods-list')">再逛逛</el-button>

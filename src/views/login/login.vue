@@ -14,9 +14,9 @@
                    <el-form-item label="password">
                        <el-input v-model="password" type="password"></el-input>
                    </el-form-item>
-                   <el-form-item class="remeber">
-                       记住密码 <el-switch v-model="remember"></el-switch>
-                   </el-form-item>
+<!--                   <el-form-item class="remeber">-->
+<!--                       记住密码 <el-switch v-model="remember"></el-switch>-->
+<!--                   </el-form-item>-->
                </el-form>
            </div>
            <div class="act">
@@ -27,6 +27,7 @@
     </div>
 </template>
 <script>
+    import {$login} from '@/api/users'
     export default {
         name: "login",
         data() {
@@ -39,16 +40,32 @@
         created() {
 
         },
+        beforeRouteEnter(to,from,next){
+          if (!sessionStorage.getItem('user')) {
+              next()
+          }
+        },
         methods: {
-            onSubmit() {
-                console.log('submit!');
-            },
-            toLogin(){
-                this.$message({
-                    type: 'success',
-                    message: '登录成功!'
-                });
-                this.goToPage('goods-list');
+            async toLogin(){
+                if(!this.username || !this.password){
+                    this.$message({
+                        type: 'warning',
+                        message: '不能为空!'
+                    });
+                    return;
+                }
+                let data = await $login({
+                    username:this.username,
+                    password:this.password,
+                    // remember:this.remember
+                })
+                if(data && data.code==0){
+                    sessionStorage.setItem('user',JSON.stringify(data.data));
+                    setTimeout(()=>{
+                        this.goToPage('goods-list');
+                    },1000)
+
+                }
             }
         }
     }
@@ -83,6 +100,7 @@
                 margin-top: 55px;
             }
             .act{
+                margin-top: 110px;
                 .el-button{
                     height: 45px;
                     font-size: 16px;

@@ -4,7 +4,7 @@ import { $get, $post } from '@/libs/ajax.js';
 // 获取全部数据
 const $getAll = (data = {}) => {
     return $get(
-        '/api/users',
+        '/users',
         Object.assign({}, data)
     )
 }
@@ -12,15 +12,26 @@ const $getAll = (data = {}) => {
 // 获取单个数据
 const $getOne = (data = {}) => {
     return $get(
-        '/api/users/getone',
+        '/users/getone',
         Object.assign({}, data)
+    )
+}
+// 获取单个数据
+const $login = (data = {}) => {
+    return $post(
+        '/users/login',
+        Object.assign({},data),{
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
     )
 }
 
 // 新增数据
 const $add = (data) => {
     return $post(
-        '/api/users/add',
+        '/users/add',
         Object.assign({},data),{
             headers: {
                 'Content-Type': 'application/json'
@@ -31,7 +42,7 @@ const $add = (data) => {
 // 删除单个数据
 const $delete = (data = {}) => {
     return $get(
-        '/api/users/delete',
+        '/users/delete',
         Object.assign({}, data)
     )
 }
@@ -39,11 +50,10 @@ const $delete = (data = {}) => {
 // 更新数据
 const $updata = (data) => {
     return $post(
-        '/api/users/update',
-        Object.assign({},data),{
-            headers: {
-                'Content-Type': 'application/json'
-            }
+        '/users/update',
+        data,
+        {
+            FormData: true
         }
     )
 }
@@ -51,6 +61,7 @@ const $updata = (data) => {
 export {
     $getAll,
     $getOne,
+    $login,
     $add,
     $delete,
     $updata,

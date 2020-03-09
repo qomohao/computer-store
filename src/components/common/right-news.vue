@@ -4,27 +4,40 @@
 */
 <template>
     <div class="right-news">
-        <div class="news-item" v-for="i in 30">
-            <div class="content">
-                新闻内容新闻内容新闻内容新闻内容新闻内容新闻内容新闻内容新闻内容新闻内容新闻内容新闻内容新闻内容新闻内容新闻内容新闻内容新闻内容新闻内容新闻内容
+        <div class="news-item" v-for="(v,i) in newsList" :key="i" @click="goToNewsDetails(v._id)">
+            <div class="content ellipsis-row-1">
+                {{v.title}}
             </div>
             <div class="info flex justify-between align-center">
-                <div class="author">作者：默</div>
-                <div class="data">2019-1-1</div>
+                <div class="author ellipsis-row-1">作者：{{v.author}}</div>
+                <div class="date">{{formatDate(v.create_at)}}</div>
             </div>
         </div>
     </div>
 </template>
 <script>
+    import {$getAll} from '@/api/news'
     export default {
         name: "right-news",
         data() {
-            return {}
+            return {
+                newsList:[]
+            }
         },
         created() {
-
+            this.getNewsList();
         },
-        methods: {}
+        methods: {
+            async getNewsList(){
+                let data = await $getAll({});
+                if (data && data.code===0){
+                    this.newsList=data.data;
+                }
+            },
+            goToNewsDetails(id){
+                this.goToPage('news-detail',{id:id});
+            }
+        }
     }
 </script>
 
@@ -43,7 +56,13 @@
                 padding-bottom: 10px;
             }
             .info{
-
+                .author{
+                    width: 60%;
+                }
+                .date{
+                    width: 40%;
+                    text-align: right;
+                }
             }
         }
     }

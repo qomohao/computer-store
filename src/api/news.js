@@ -4,7 +4,7 @@ import { $get, $post } from '@/libs/ajax.js';
 // 获取全部数据
 const $getAll = (data = {}) => {
     return $get(
-        '/goods',
+        '/news',
         Object.assign({}, data)
     )
 }
@@ -12,7 +12,7 @@ const $getAll = (data = {}) => {
 // 获取单个数据
 const $getOne = (data = {}) => {
     return $get(
-        '/goods/getone',
+        '/news/getone',
         Object.assign({}, data)
     )
 }
@@ -20,7 +20,7 @@ const $getOne = (data = {}) => {
 // 新增数据
 const $add = (data) => {
     return $post(
-        '/goods/add',
+        '/news/add',
         data,
         {
             FormData: true
@@ -31,7 +31,7 @@ const $add = (data) => {
 // 删除单个数据
 const $delete = (data = {}) => {
     return $get(
-        '/goods/delete',
+        '/news/delete',
         Object.assign({}, data)
     )
 }
@@ -39,7 +39,7 @@ const $delete = (data = {}) => {
 // 更新数据
 const $updata = (data) => {
     return $post(
-        '/goods/update',
+        '/news/update',
         Object.assign({},data),{
             headers: {
                 'Content-Type': 'application/json'

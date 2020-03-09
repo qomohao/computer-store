@@ -9,13 +9,13 @@
             <div class="content">
                 <el-form label-position="top" label-width="80px">
                     <el-form-item label="username">
-                        <el-input v-model="username"></el-input>
+                        <el-input v-model="username"  maxlength="20" placeholder="请输入用户名"></el-input>
                     </el-form-item>
                     <el-form-item label="password">
-                        <el-input v-model="password"  type="password"></el-input>
+                        <el-input v-model="password"  type="password"  maxlength="20" placeholder="请输入密码"></el-input>
                     </el-form-item>
                     <el-form-item label="repassword">
-                        <el-input v-model="repassword" type="password"></el-input>
+                        <el-input v-model="repassword" type="password"  maxlength="20" placeholder="请再次输入密码"></el-input>
                     </el-form-item>
                 </el-form>
             </div>
@@ -27,7 +27,7 @@
     </div>
 </template>
 <script>
-import {$add} from '@/api/users'
+import {$getAll,$add} from '@/api/users'
     export default {
         name: "register",
         data() {
@@ -38,11 +38,17 @@ import {$add} from '@/api/users'
             }
         },
         created() {
-
+            // this.getAll()
+        },
+        beforeRouteEnter(to,from,next){
+            if (!sessionStorage.getItem('user')) {
+                next()
+            }
         },
         methods: {
-            onSubmit() {
-                console.log('submit!');
+            async getAll(){
+              let data = await  $getAll({});
+              console.log(data)
             },
              async register(){
               if(!this.username || !this.password || !this.repassword){
@@ -50,25 +56,20 @@ import {$add} from '@/api/users'
                     type: 'warning',
                     message: '不能为空!'
                 });
-                
                 return;
               }else if(this.password!=this.repassword){
                     this.$message({
                     type: 'warning',
                     message: '两次密码不一致！'
-                });
-                return
+                    });
+                    return
                 }
-                let data = await $add({},{
+                let data = await $add({
                     username:this.username,
                     password:this.password
                 })
-                if(data && data.status==1){
-                      this.$message({
-                            type: 'success',
-                            message: '登录成功!'
-                      });
-                    console.log(data)
+                if(data && data.code==0){
+                   this.goToPage('login')
                 }
             }
         }

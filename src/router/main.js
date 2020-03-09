@@ -28,12 +28,26 @@ export  default [
                 },
                 component:  () => import(/* webpackChunkName: 'main' */'@/views/main/search-result.vue'),
             },{
+                path: '/goods-sort',
+                name: "goods-sort",
+                meta: {
+                    title: 'goods-sort',
+                },
+                component:  () => import(/* webpackChunkName: 'main' */'@/views/main/goods-sort.vue'),
+            },{
                 path: '/goods-detail',
                 name: "goods-detail",
                 meta: {
                     title: 'goods-detail',
                 },
                 component:  () => import(/* webpackChunkName: 'main' */'@/views/main/goods-detail.vue'),
+            },{
+                path: '/news-detail',
+                name: "news-detail",
+                meta: {
+                    title: 'news-detail',
+                },
+                component:  () => import(/* webpackChunkName: 'main' */'@/views/main/news-detail.vue'),
             },
             {
                 path: '/shopping-car',
@@ -56,6 +70,13 @@ export  default [
                     title: 'order-result',
                 },
                 component:  () => import(/* webpackChunkName: 'main' */'@/views/main/order/order-result.vue'),
+            },{
+                path: '/order-history',
+                name: "order-history",
+                meta: {
+                    title: 'order-history',
+                },
+                component:  () => import(/* webpackChunkName: 'main' */'@/views/main/order/order-history.vue'),
             },
             {
                 path: '/manage',
@@ -73,6 +94,13 @@ export  default [
                             title: 'manage-goods',
                         },
                         component:  () => import(/* webpackChunkName: 'main' */'@/views/manage/manage-content/manage-goods.vue'),
+                    }, {
+                        path: 'manage-category',
+                        name: "manage-category",
+                        meta: {
+                            title: 'manage-category',
+                        },
+                        component:  () => import(/* webpackChunkName: 'main' */'@/views/manage/manage-content/manage-category.vue'),
                     },{
                         path: 'manage-info',
                         name: "manage-info",
@@ -94,6 +122,13 @@ export  default [
                             title: 'manage-users',
                         },
                         component:  () => import(/* webpackChunkName: 'main' */'@/views/manage/manage-content/manage-users.vue'),
+                    },{
+                        path: 'manage-order',
+                        name: "manage-order",
+                        meta: {
+                            title: 'manage-order',
+                        },
+                        component:  () => import(/* webpackChunkName: 'main' */'@/views/manage/manage-content/manage-order.vue'),
                     },
 
                 ]

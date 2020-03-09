@@ -3,7 +3,7 @@ import Vue from "vue"
 Vue.mixin({
   data() {
     return {
-
+      imgUrl:'http://127.0.0.1:3000/upload/',
     }
   },
   methods: {
@@ -25,5 +25,17 @@ Vue.mixin({
     reload() {
       location.href=location.href.split('#')[0]
     },
+     /**
+     *时间格式转换
+     */
+    formatDate(date) {
+      var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+        return [year, month, day].join('-');
+    }
   }
 })

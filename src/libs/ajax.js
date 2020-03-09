@@ -5,6 +5,7 @@
 import axios from 'axios';
 import Qs from 'qs';
 import Vue from 'vue';
+import { Message } from 'element-ui';
 /**
  * axios配置
  */
@@ -16,10 +17,7 @@ axios.defaults.timeout = 30000;
 /**
  * API数据请求接口封装
  */
-// let baseUrl='127.0.0.1:3000';
-
 const getAjaxUrl =(baseUrl)=>   {
-    // return configURL.baseURL + url + configURL.urlParams+'&openId='+openId+'&accessId'+accessId;
     return baseUrl;
 };
 /**
@@ -30,6 +28,7 @@ axios.interceptors.request.use(config => {
     /**
      * 在发送请求之前做些什么
      */
+    Message.closeAll();
     return config;
 }, error => {
     /**
@@ -44,6 +43,7 @@ axios.interceptors.response.use(
          *  response.status === 200表明接口请求成功
          */
         if (response.status === 200) {
+            Message.closeAll();
             /**
              * resCode 返回状态码,resMsg 返回提示信息，swicth根据返回状态码进行操作
              */
@@ -52,8 +52,10 @@ axios.interceptors.response.use(
             const resMsg = response.data.msg;
             switch (resCode) {
                 case 0:
+                    Message.success(resMsg)
                     return Promise.resolve(response.data);
                 case 500:
+                    Message.error(resMsg)
                     break;
                 default:
                     return Promise.resolve(response.data);

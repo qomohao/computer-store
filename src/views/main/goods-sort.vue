@@ -3,16 +3,17 @@
 * @author   wanghao
 */
 <template>
-    <div class="search-result">
+    <div class="goods-sort">
         <div class="flex  flex-wrap" v-if="goodsList.length">
-            <div class="goods-item" v-for=" (v,i)  in goodsList" :key="i">
+            <div class="goods-item" v-for="(v,i)  in goodsList" :key="i" >
                 <div class="img">
                     <el-image
                             :src="imgUrl+v.img[0]"
                             fit="contain"
-                    ></el-image>
+                    >
+                    </el-image>
                 </div>
-              <div class="price flex justify-between align-center">
+               <div class="price flex justify-between align-center">
                     <div class="title ellipsis-row-1">{{v.title}}</div>
                     <div class="count">￥{{v.price}}</div>
                 </div>
@@ -42,7 +43,7 @@
     import {$getAll} from '@/api/goods';
     import {$add} from '@/api/shopCar'
     export default {
-        name: "search-result",
+        name: "goods-sort",
         data() {
             return {
                 src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
@@ -66,7 +67,7 @@
                 }
             },
             async getGoodsList(){
-                let data = await $getAll({key:this.$route.query.key});
+                let data = await $getAll({categoryId:this.$route.query.categoryId});
                 if (data && data.code===0){
                     this.goodsList=data.data;
                     console.log(this.goodsList)
@@ -77,7 +78,7 @@
 </script>
 
 <style lang='less' scoped>
-    .search-result {
+    .goods-sort {
         height: 100%;
         overflow-y: scroll;
         .goods-item{
@@ -91,7 +92,7 @@
                 overflow: hidden;
                 text-align: center;
             }
-           .price{
+            .price{
                 margin: 0 10px;
                 padding: 15px 0;
                .title{

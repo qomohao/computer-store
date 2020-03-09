@@ -2,9 +2,9 @@ import { $get, $post } from '@/libs/ajax.js';
 
 
 // 获取全部数据
-const $getAll = (data = {}) => {
+const $getAllCat = (data = {}) => {
     return $get(
-        '/goods',
+        '/category',
         Object.assign({}, data)
     )
 }
@@ -12,7 +12,7 @@ const $getAll = (data = {}) => {
 // 获取单个数据
 const $getOne = (data = {}) => {
     return $get(
-        '/goods/getone',
+        '/category/getone',
         Object.assign({}, data)
     )
 }
@@ -20,10 +20,11 @@ const $getOne = (data = {}) => {
 // 新增数据
 const $add = (data) => {
     return $post(
-        '/goods/add',
-        data,
-        {
-            FormData: true
+        '/category/add',
+        Object.assign({},data),{
+            headers: {
+                'Content-Type': 'application/json'
+            }
         }
     )
 }
@@ -31,7 +32,7 @@ const $add = (data) => {
 // 删除单个数据
 const $delete = (data = {}) => {
     return $get(
-        '/goods/delete',
+        '/category/delete',
         Object.assign({}, data)
     )
 }
@@ -39,7 +40,7 @@ const $delete = (data = {}) => {
 // 更新数据
 const $updata = (data) => {
     return $post(
-        '/goods/update',
+        '/category/update',
         Object.assign({},data),{
             headers: {
                 'Content-Type': 'application/json'
@@ -49,7 +50,7 @@ const $updata = (data) => {
 }
 
 export {
-    $getAll,
+    $getAllCat,
     $getOne,
     $add,
     $delete,
